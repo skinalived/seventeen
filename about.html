@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kurapika Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto+Mono&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto Mono', monospace;
+      user-select: none;
+    }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+    }
+    .floating {
+      position: absolute;
+      pointer-events: none;
+      animation: floatUp 1.5s ease-out forwards;
+      z-index: 50;
+    }
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-100px) scale(1.2);
+      }
+    }
+    .rainbow-text-hover {
+      background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
+      background-size: 400% 100%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: white;
+      transition: all 0.4s ease-in-out;
+    }
+    .rainbow-text-hover:hover {
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      animation: rainbowShift 3s linear infinite;
+    }
+    @keyframes rainbowShift {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+  </style>
+</head>
+<body class="bg-black text-white" oncontextmenu="return false" onkeydown="return !(event.ctrlKey && (event.key === 'u' || event.key === 'U' || event.key === 'c' || event.key === 'C'))">
+  
+  <!-- Banner Section -->
+  <header class="relative w-full h-72 bg-gradient-to-r from-black to-gray-800 shadow-lg overflow-hidden">
+    <img src="https://cdn.discordapp.com/banners/129168084887011328/a_d6a00c41fa1fa06c8110c6bb86299657.gif?size=1024"
+         alt="Discord Banner"
+         class="absolute inset-0 w-full h-full object-cover opacity-60 rounded-b-xl">
+    <div class="absolute left-8 bottom-0 flex items-end space-x-6 p-4">
+      <img src="https://cdn.discordapp.com/avatars/129168084887011328/f6c7a3b0da79e67f8dc2f29cc52b29f6.png?size=1024"
+           alt="Profile"
+           class="w-36 h-36 rounded-full shadow-xl transition-transform duration-300 hover:scale-110 cursor-pointer"
+           id="profile-img" onclick="popPngs(event)">
+      <div class="mb-1 relative">
+        <div class="inline-block cursor-pointer select-none" id="name-wrapper"
+             onmouseenter="swapName(true)" onmouseleave="swapName(false)" onclick="popHeart(event)">
+          <h1 class="text-5xl font-bold transition-all duration-300 text-white" id="nickname">017</h1>
+        </div>
+        <p class="text-xl mt-2 rainbow-text-hover select-none">
+          Gamer | Coder | Artist
+        </p>
+      </div>
+    </div>
+  </header>
+
+ <!-- WHO AM I Section -->
+<section class="text-center px-6 py-16 max-w-3xl mx-auto">
+  <h2 class="text-4xl font-bold mb-6 tracking-wide">WHO AM I</h2>
+  <p class="text-lg leading-relaxed text-gray-300 mb-10">
+    im <span class="text-red-400 font-semibold">Ayhan</span> aka  
+    <span class="text-red-400 font-semibold">017</span> im from Bulgaria i love to play fps games mostly valorant and rust  
+  </p>
+
+  <!-- Go Back Button -->
+  <!-- Go Back Button -->
+<a href="index.html"
+class="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-6 rounded-full shadow-md transition-transform duration-300 hover:scale-105 inline-block">
+⬅ Go Back
+</a>
+
+  </button>
+</section>
+
+<script>
+  function goBack() {
+    window.history.back();
+  }
+</script>
+
+<script>
+  function goBack() {
+    window.history.back();
+  }
+</script>
+
+  </section>
+
+  <!-- Scripts -->
+  <script>
+    function swapName(showAyhan) {
+      const nickname = document.getElementById("nickname");
+      nickname.textContent = showAyhan ? "ayhan" : "017";
+    }
+
+    function popHeart(event) {
+      const nickname = document.getElementById("nickname");
+      const rect = nickname.getBoundingClientRect();
+      const startX = rect.left;
+      const width = rect.width;
+      const topY = rect.top + 10;
+      const heartCount = 10;
+      for (let i = 0; i < heartCount; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'floating text-white';
+        heart.textContent = '🤍';
+        const size = 18 + Math.random() * 6;
+        heart.style.fontSize = `${size}px`;
+        const randX = startX + Math.random() * width;
+        heart.style.left = `${randX}px`;
+        heart.style.top = `${topY}px`;
+        const offsetX = (Math.random() - 0.5) * 120;
+        const offsetY = -50 - Math.random() * 80;
+        const rotate = (Math.random() - 0.5) * 45;
+        heart.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${rotate}deg)`;
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 1600);
+      }
+    }
+
+    function popPngs(event) {
+      const img = event.currentTarget;
+      const rect = img.getBoundingClientRect();
+      const imageURL = "kedicik.gif"; // Replace with your image path
+      const headCenterX = rect.left + rect.width / 2;
+      const headTopY = rect.top + rect.height * 0.15;
+      for (let i = 0; i < 12; i++) {
+        const png = document.createElement("img");
+        png.src = imageURL;
+        png.className = "floating";
+        png.style.position = "absolute";
+        png.style.width = `${16 + Math.random() * 10}px`;
+        const startX = headCenterX + (Math.random() - 0.5) * 80;
+        png.style.left = `${startX}px`;
+        png.style.top = `${headTopY}px`;
+        const offsetX = (Math.random() - 0.5) * 120;
+        const offsetY = -80 - Math.random() * 60;
+        const rotate = (Math.random() - 0.5) * 360;
+        png.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${rotate}deg)`;
+        document.body.appendChild(png);
+        setTimeout(() => png.remove(), 1600);
+      }
+    }
+  </script>
+</body>
+</html>
